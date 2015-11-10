@@ -10,7 +10,8 @@ class Article extends Model {
     protected $fillable = [
         'title',
         'body',
-        'published_at'
+        'published_at',
+        'user_id'
     ];
 
     protected $dates = ['published_at'];
@@ -30,4 +31,8 @@ class Article extends Model {
         $this->attributes['Published_at'] = Carbon::createFromFormat('Y-m-d',$date);
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

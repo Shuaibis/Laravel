@@ -11,9 +11,18 @@
 |
 */
 
+/*
+Route::get('about',['middleware' => 'auth', function()
+{
+    return 'this page will only show if the user is signed in';
+}]);
+*/
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('articles','ArticlesController');
 
 //Route::get('articles','ArticlesController@index');
 //Route::get('articles/create','ArticlesController@create');
@@ -21,4 +30,12 @@ Route::get('/', function () {
 //Route::post('articles','ArticlesController@store');
 //Route::get('articles/{id}/edit','ArticlesController@edit');
 
-Route::resource('articles','ArticlesController');
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+
+Route::get('foo', ['middleware' => 'manager', function()
+{
+    return 'this page may only be viewed by managers';
+}]);
